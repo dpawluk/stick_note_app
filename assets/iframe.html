@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- http://garden.zendesk.com -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@zendeskgarden/css-bedrock@7.0" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="post_it_wrapper">
+    <div id="post_it_app">
+      <input id="note_id" type="hidden">
+      <textarea id="post_it_text"></textarea>
+      <!-- <button id="test_save">Save</button> -->
+      <span style="display:none" id="saving_spinner"><img src="images/saving.gif">Saving...</span>
+    </div>
+  </div>
+  <!-- https://github.com/zendesk/zendesk_app_framework_sdk -->
+  <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+  <script>
+    // Initialise the Zendesk JavaScript API client
+    // https://developer.zendesk.com/apps/docs/apps-v2
+    var client = ZAFClient.init();
+    client.invoke('resize', { width: '100%', height: '325px' });
+    client.on('app.registered', init);  // fire 'init' function when app first opens on a ticket.
+    client.on('app.activated', init);  // fire 'init' function when switching back to a tab/screen with the app already open.
+
+    function init(){
+      client.get('currentUser').then(checkForUserNote);
+      // get current users object
+      // check for existing note and create resource if not there
+    };
+
+    function checkForUserNote(userobj){
+      // isolate user_id from user objecct, get related notes...
+
+        //if 404 then create initial note and relationship
+
+
+    };
+
+    function createNoteResource(){
+      // create payload for empty sticky note, then create note resources
+      // return a promise object something like `return client.request(req);` should be last line
+
+    };
+
+    function createNoteRelationship(note_id, user_id){
+      // create payload for the 1:1 user to note relationship
+      // relationship type to use from shell script is 'user_to_note'
+      // return a promise object something like `return client.request(req);` should be last line
+
+    };
+
+    function startAutoSave(){
+      //create a variable for a timeoutId
+      // on keydown and keyup, clearTimeout, set 2 second timeout to autosave so that after typing is done for 2 whole seconds the note saves
+      var timeoutId;
+      $('#post_it_text').on('keydown keyup', function() {
+        console.log('Textarea Change');
+
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() {
+          // Runs 2 second (2000 ms) after the last change
+          updateNoteResource();
+          console.log("autosave would start");
+        }, 2000);
+      });
+    };
+
+    function updateNoteResource(){
+      // show the save spinner message
+      // get the latest values in the
+      // create payload for resource update
+      // create merge/patch request
+      // send request and hide spinner again
+
+    };
+
+
+
+  </script>
+</body>
+</html>
