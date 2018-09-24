@@ -44,6 +44,15 @@
 
     function createNoteResource(){
       // create payload for empty sticky note, then create note resources
+      var payload =
+      {
+        "data": {
+          "type": "sticky_note",
+          "attributes": {
+            "note": " "
+          }
+        }
+      };
       // return a promise object something like `return client.request(req);` should be last line
 
     };
@@ -51,7 +60,16 @@
     function createNoteRelationship(note_id, user_id){
       // create payload for the 1:1 user to note relationship
       // relationship type to use from shell script is 'user_to_note'
+      var payload =
+      {
+        "data": {
+          "relationship_type": "user_to_note",
+          "source": "zen:user:" + user_id,
+          "target": note_id
+        }
+      };
       // return a promise object something like `return client.request(req);` should be last line
+
 
     };
 
@@ -75,7 +93,7 @@
       // show the save spinner message
       // get the latest values in the
       // create payload for resource update
-      // create merge/patch request
+      // create merge/patch request `"contentType": "application/merge-patch+json"`
       // send request and hide spinner again
 
     };
